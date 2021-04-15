@@ -7,6 +7,10 @@
     <title>Server request</title>
     <!-- jquery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- VueJS -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <!-- VueAxios -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
     <!-- my css -->
     <link rel="stylesheet" href="style.css">
     <!-- my script -->
@@ -14,10 +18,19 @@
 </head>
 
 <body>
-    <h1>My first request to a server</h1>
-    <div>
-        <ul id="emails"></ul>
+
+    <div class="jquery-container">
+        <h1>My first request to a server with AXIOS</h1>      
+        <ul id="email-list"></ul>
     </div>
+
+    <div id="app" class="vue-container">
+        <h1>My first request to a server with AXIOS</h1>
+        <ul>
+            <li v-for="elem in emails">{{elem}}</li>
+        </ul>
+    </div>
+    
 </body>
 
 </html>
