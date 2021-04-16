@@ -1,26 +1,26 @@
 //  CHIAMATA CON JQUERY E AJAX
-function printMail(val){
+function mailGenerator(val){
     for(let i=0;i<val;i++){
-        mailGenerator();
-    }
+        $.ajax({
+            url: 'https://flynn.boolean.careers/exercises/api/random/mail',
+            method: 'GET',
+            success: function(data){
+                    const res = data['response'];
+                    printMail(res);
+            },
+            error: function(){
+                console.log("ERRORE");
+            }
+        })
+    }   
 }
 
-function mailGenerator(){
-    $.ajax({
-        url: 'https://flynn.boolean.careers/exercises/api/random/mail',
-        method: 'GET',
-        success: function(data){
-                const res = data['response'];
-                $("#email-list").append(`<li>${res}</li>`);
-        },
-        error: function(){
-            console.log("ERRORE");
-        }
-    })
+function printMail(elem){
+    $("#email-list").append(`<li>${elem}</li>`);
 }
 
 function init(){
-    printMail(10);
+    mailGenerator(10);
 }
 
 // CHIAMATA CON VUE E AXIOS
@@ -35,7 +35,10 @@ function initVue(){
             for( let i = 0; i<10; i++){
                 
                 axios.get('https://flynn.boolean.careers/exercises/api/random/mail')
-                .then(response => ( this.emails.push(response['data']['response'])));               
+                .then(response => {
+                    const email = response['data']['response'];
+                    this.emails.push(email);
+                });               
                
             }
         },
